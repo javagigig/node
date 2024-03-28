@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div>
+    <div>
+        <input type="text" id="userId" placeholder="아이디">
+    </div>
+    <div>
+        <input type="password" id="pwd" placeholder="비밀번호">
+    </div>
+         <button onclick="fnLogin()">로그인</button>
+    </div>
+</body>
+</html>
+<script>
+    class Login {
+    checkUser(id, pwd){
+        return new Promise((resolve, reject) =>{
+            if(
+                (id == 'test' && pwd == '1234') ||
+                (id == 'admin' && pwd == 'admin')
+            ){
+                resolve(id);
+            } else{
+                reject(new Error('에러 발생!'));
+            }
+        });
+    }
+
+    getStatus(id){
+        return new Promise((resolve, reject)=>{
+            if(id == 'admin'){
+                resolve("관리자");
+            } else {
+                if(id == undefined){
+                    resolve(id);
+                } else{
+                    reject("일반유저");
+                }
+            }
+        })
+    }
+
+}
+var login = new Login();
+login
+    .checkUser("admin", "admin")
+    .then(id => {
+        console.log(id + '님 환영합니다.');
+        return login.getStatus(id);
+    })
+    .then(status => {console.log(status + " 입니다.")})
+    .catch(error => {console.log(error)});
+    function fnLogin(){
+        var id = document.querySelector("#userId").value;
+        var pwd = document.querySelector("#pwd").value;
+        var login = new Login();
+
+        login
+        .checkUser(id, pwd)
+        .then(id => {
+            alert(id + '님 환영합니다.');
+            return login.getStatus(id);
+        })
+        .then(status => {alert(status + " 입니다.")})
+        .catch(error => {alert(error)});
+       
+    }
+   
+
+    
+</script>

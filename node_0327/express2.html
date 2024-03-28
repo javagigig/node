@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div>
+        <input id="userId" placeholder="검색 아이디">
+        <button onclick="fnSearch()">검색</button>
+        <div id="userName"></div>
+    </div>
+    <br>
+    <div>
+        <div>아이디: <span id="id"></span></div>
+        <div>이름: <span id="name"></span></div>
+        <div>주소: <span id="addr"></span></div>
+    </div>
+
+</body>
+</html>
+<script>
+    async function fnSearch() {
+        var userId = document.querySelector("#userId").value;
+        const response = await fetch(`http://localhost:3001/profile/${userId}`);
+        const jsonData = await response.json();
+        console.log(jsonData);
+       // document.querySelector("#userName").innerHTML = `<h1>${jsonData.USERNAME}</h1>`;
+       document.querySelector("#id").innerHTML =  jsonData.USERID;
+       document.querySelector("#name").innerHTML =  jsonData.USERNAME;
+       document.querySelector("#addr").innerHTML =  jsonData.ADDR;
+    }
+
+</script>

@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <!--
+            <button onclick="fnClick()">출력</button>
+    -->
+    <!--input 박스에 입력한 값을 버튼 클릭시 3초 뒤에 alert으로 출력-->
+    <input type="text" id="inputValue" placeholder="값을 입력해주세요">
+    <button onclick="fnInput()">출력</button>
+    
+</body>
+</html>
+<script>
+    function fnClick (){
+        console.log("홍길동");
+    }
+    
+    // input 박스에 입력한 값을 버튼 클릭시 3초 뒤에 alert으로 출력
+    function fnInput(){
+        var inputValue = document.getElementById("inputValue").value;
+        // # <= id
+        // == document.querySelector("#inputValue").value;
+        setTimeout(()=>{alert(inputValue);}, 3000);
+    }
+</script>

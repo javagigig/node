@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div>
+        <input id="userId" placeholder="검색 아이디">
+        <button onclick="fnSearch()">검색</button>
+        <div id="userName"></div>
+    </div>
+    <br>
+    <div>
+        <div><input id="insertId" placeholder="아이디"></div>
+        <div><input id="insertName" placeholder="이름"></div>
+        <div><input id="addr" placeholder="주소"></div>
+        <div><button onclick="fnSave()">저장</button></div>
+    </div>
+
+</body>
+</html>
+<script>
+    async function fnSearch() {
+        var userId = document.querySelector("#userId").value;
+        const response = await fetch(`http://localhost:3001/search?id=${userId}`);
+        const jsonData = await response.json();
+        console.log(jsonData);
+        document.querySelector("#userName").innerHTML = `<h1>${jsonData.USERNAME}</h1>`;
+    }
+
+    async function fnSave() {
+        var insertId = document.querySelector("#insertId").value;
+        var insertName = document.querySelector("#insertName").value;
+        var addr = document.querySelector("#addr").value;
+        const response = await fetch(`http://localhost:3001/insert?id=${insertId}&name=${insertName}&addr=${addr}`);
+        const jsonData = await response.json();
+        alert(jsonData.msg);      
+    }
+
+
+</script>
